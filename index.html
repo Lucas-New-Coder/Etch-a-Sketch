@@ -7,12 +7,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-   
-    <button id="newGrid" onclick="getNewGrid(value)">New Grid</button>
-    <button id="erase" onclick="erase()">erase</button>
-    <label for="color">Chose a color</label>
+    <h1 class="title">ETCH-A-SKETCH</h1>
+    <div class="options">
+    <button id="newGrid" onclick="getNewGrid(value)" >New Grid</button>
+    <button id="erase" onclick="erase()">Eraser</button>
+    </div>
+    <div class="color">
+    <label for="color">Choose a color</label>
     <input type="color" id="color" value="#0000ff">
+    </div>
+   <div class="main">
     <div id="container"></div>
+</div>
 
 
 
