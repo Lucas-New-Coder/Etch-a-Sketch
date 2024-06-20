@@ -1,53 +1,69 @@
-let container = document.querySelector('#container')
-let color = document.querySelector('#color')
-let newGrid = document.querySelector('#newGrid')
+let container = document.querySelector(`#container`)
+let color = document.querySelector(`#color`)
+let eraser = document.querySelector(`#erase`)
+erase.addEventListener(`mousedown`, () => {
+    eraser()
+})
+
+let newGrid = document.querySelector(`#newGrid`)
+newGrid.addEventListener(`mousedown`, () => {
+    getNewGrid()
+})
 
 
-function createGrid(size){
-    container.innerHTML = ''
+gridColor = (element) => {
+
+    element.style.backgroundColor = color.value
+}
+
+function createGrid(size) {
 
     let isMouseDown = false
-    
-    for(let i=0; i<size*size;i++){
-        let grid = document.createElement('div')
-        grid.classList.add('grid')
-        
-        grid.addEventListener('mousedown',()=>{
-            isMouseDown=true;grid.style.backgroundColor = color.value
+
+    for (let i = 0; i < size * size; i++) {
+
+        let grid = document.createElement(`div`)
+        grid.classList.add(`grid`)
+
+        grid.addEventListener(`mousedown`, () => {
+            isMouseDown = true
+            gridColor(grid)
         })
-        grid.addEventListener('mouseup',()=>{
+
+        grid.addEventListener(`mouseenter`, () => {
+            if (isMouseDown) {
+                gridColor(grid)
+            }
+        })
+
+        grid.addEventListener(`mouseup`, () => {
             isMouseDown = false
         })
-        grid.addEventListener('mouseenter',()=>{
-            if (isMouseDown){
-                grid.style.backgroundColor = color.value
-            }
-    })
+
+
+
         container.appendChild(grid)
     }
 
-    const gridSize = 656/size
-    const gridElement = document.querySelectorAll('.grid')
-    gridElement.forEach(grid=>{
-        grid.style.width =`${gridSize}px`
-        grid.style.height =`${gridSize}px`
+    const gridSize = 656 / size
+    const gridElement = document.querySelectorAll(`.grid`)
+    gridElement.forEach(grid => {
+        grid.style.width = `${gridSize}px`
+        grid.style.height = `${gridSize}px`
     })
-  
-}
-function erase(){
-    let erase = document.querySelector('#erase')
-    erase= color.value='#FFFFFF'
 
 }
-
-    function getNewGrid(newGrid){
-        value = newGrid
-        value = Number (prompt('Grid size'))
-        if (value>100){alert('The grid size most be below 100')}else if (
-            value<=100)
-        
-        {createGrid(value)}
-
-    }
 
 createGrid(16)
+
+getNewGrid = () => {
+    container.innerHTML = ''
+    newGrid = Number(prompt(`Grid Size`))
+    if (newGrid > 100) { alert(`The grid size most be below 100`) }
+
+    createGrid(newGrid)
+}
+
+eraser=()=>{
+    color.value = `#FFFFFF`
+}
